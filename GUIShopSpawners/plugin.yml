@@ -1,0 +1,7 @@
+name: GUIShopSpawners
+main: me.Darrionat.GUIShopSpawners.Main
+description: A way to buy spawners!
+version: 0.1
+
+commands:
+  spawners:

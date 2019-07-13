@@ -1,0 +1,98 @@
+#This is what will show at the top of the GUIName
+#Example - GUIName: '&aSpawner &bShop'
+GUIName: '&cSpawners'
+
+#Prices of Spawners
+Creeper: 750000
+Skeleton: 600000
+Spider: 500000
+IronGolem: 1500000
+Zombie: 600000
+Slime: 750000
+Witch: 1000000
+ZombiePigman: 800000
+Enderman: 800000
+CaveSpider: 500000
+Vindicator: 1250000
+Cow: 250000
+Rabbit: 250000
+Sheep: 250000
+Horse: 400000
+Blaze: 750000
+Pig: 250000
+Chicken: 200000
+Squid: 200000
+Wolf: 200000
+Mooshroom: 350000
+
+#Messages - Color Codes do work
+#Message Sent when a person buys a spawner
+#Example - ZombieMsg: 'You bought a spawner'
+CreeperMsg: '&aYou just purchased a &eCreeper Spawner'
+SkeletonMsg: '&aYou just purchased a &Skeleton Spawner'
+SpiderMsg: '&aYou just purchased a &eSpider Spawner'
+IronGolemMsg: '&aYou just purchased an &eIron Golem Spawner'
+ZombieMsg: '&aYou just purchased a &eZombie Spawner'
+SlimeMsg: '&aYou just purchased a &eSlime Spawner'
+WitchMsg: '&aYou just purchased a &eWitch Spawner'
+ZombiePigmanMsg: '&aYou just purchased a &eZombie Pigman Spawner'
+EndermanMsg: '&aYou just purchased an &eEnderman Spawner'
+CaveSpiderMsg: '&aYou just purchased a &eCave Spider Spawner'
+VindicatorMsg: '&aYou just purchased a &eVindicator Spawner'
+CowMsg: '&aYou just purchased a &eCow Spawner'
+RabbitMsg: '&aYou just purchased a &eRabbit Spawner'
+SheepMsg: '&aYou just purchased a &eSheep Spawner'
+HorseMsg: '&aYou just purchased a &eHorse Spawner'
+BlazeMsg: '&aYou just purchased a &eBlaze Spawner'
+PigMsg: '&aYou just purchased a &ePig Spawner'
+ChickenMsg: '&aYou just purchased a &eChicken Spawner'
+SquidMsg: '&aYou just purchased a &eSquid Spawner'
+WolfMsg: '&aYou just purchased a &eWolf Spawner'
+MooshroomMsg: '&aYou just purchased a &eMooshroom Spawner'
+
+#Commands
+#This is configured for SilkSpawners; leave untouched if SilkSpawners is installed.
+#Commands ran (by console) to give players their spawner.
+#Use %player% for username of player
+creeper:
+ - ss give %player% creeper 1
+skeleton:
+ - ss give %player% skeleton 1
+spider:
+ - ss give %player% spider 1
+irongolem:
+ - ss give %player% irongolem 1
+zombie:
+ - ss give %player% zombie 1
+slime:
+ - ss give %player% slime 1
+witch:
+ - ss give %player% witch 1
+zombiepigman:
+ - ss give %player% zombiepigman 1
+enderman:
+ - ss give %player% enderman 1
+cavespider:
+ - ss give %player% cavespider 1
+vindicator:
+ - ss give %player% vindicator 1
+cow:
+ - ss give %player% cow 1
+rabbit:
+ - ss give %player% rabbit 1
+sheep:
+ - ss give %player% sheep 1
+horse:
+ - ss give %player% horse 1
+blaze:
+ - ss give %player% blaze 1
+pig:
+ - ss give %player% pig 1
+chicken:
+ - ss give %player% chicken 1
+squid:
+ - ss give %player% squid 1
+wolf:
+ - ss give %player% wolf 1
+mooshroom:
+ - ss give %player% mooshroom 1
