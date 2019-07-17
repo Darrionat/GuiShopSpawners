@@ -16,7 +16,7 @@ public class Utils {
 
 	}
 
-	public static ItemStack createItem(Inventory inv, int materialId, int amount, int invSlot, String displayName,
+	public static ItemStack createItem(Inventory inv, String materialId, int amount, int invSlot, String displayName,
 			String... loreString) {
 
 		ItemStack item;
@@ -36,7 +36,7 @@ public class Utils {
 
 	}
 
-	public static ItemStack createItemByte(Inventory inv, int materialId, int byteId, int amount, int invSlot,
+	public static ItemStack createItemByte(Inventory inv, String materialId, int byteId, int amount, int invSlot,
 			String displayName, String... loreString) {
 
 		ItemStack item;

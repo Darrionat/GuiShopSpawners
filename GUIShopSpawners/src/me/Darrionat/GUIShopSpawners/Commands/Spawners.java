@@ -49,8 +49,13 @@ public class Spawners implements CommandExecutor {
 				return true;
 			}
 			Player p = (Player) sender;
-			p.openInventory(Main.GUI(p, plugin));
-			return true;
+			if (p.hasPermission("guishopspawners.shop")) {
+				p.openInventory(Main.GUI(p, plugin));
+				return true;
+			} else {
+				p.sendMessage(Utils.chat("&cYou do not have the permission 'guishopspawners.shop'"));
+				return true;
+			}
 		}
 		return false;
 	}

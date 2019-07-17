@@ -1,6 +1,7 @@
 package me.Darrionat.GUIShopSpawners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -42,7 +43,7 @@ public class Main extends JavaPlugin {
 		return econ != null;
 	}
 
-	// Pasted
+	// Start of inventory
 	public static Inventory inv;
 	public static String inventory_name;
 	public static int inv_rows = 5 * 9;
@@ -55,35 +56,87 @@ public class Main extends JavaPlugin {
 
 	public static Inventory GUI(Player p, JavaPlugin plugin) {
 		Inventory toReturn = Bukkit.createInventory(null, inv_rows, inventory_name);
-
-		Utils.createItem(inv, 52, 1, 1, "&eCreeper &fSpawner", "&a$" + plugin.getConfig().getInt("Creeper"));
-		Utils.createItem(inv, 52, 1, 2, "&eSkeleton &fSpawner", "&a$" + plugin.getConfig().getInt("Skeleton"));
-		Utils.createItem(inv, 52, 1, 3, "&eSpider &fSpawner", "&a$" + plugin.getConfig().getInt("Spider"));
-		Utils.createItem(inv, 52, 1, 4, "&eIron Golem &fSpawner", "&a$" + plugin.getConfig().getInt("IronGolem"));
-		Utils.createItem(inv, 52, 1, 5, "&eZombie &fSpawner", "&a$" + plugin.getConfig().getInt("Zombie"));
-		Utils.createItem(inv, 52, 1, 6, "&eSlime &fSpawner", "&a$" + plugin.getConfig().getInt("Slime"));
-		Utils.createItem(inv, 52, 1, 7, "&eWitch &fSpawner", "&a$" + plugin.getConfig().getInt("Witch"));
-		Utils.createItem(inv, 52, 1, 8, "&eZombie Pigman &fSpawner", "&a$" + plugin.getConfig().getInt("ZombiePigman"));
-		Utils.createItem(inv, 52, 1, 9, "&eEnderman &fSpawner", "&a$" + plugin.getConfig().getInt("Enderman"));
-		Utils.createItem(inv, 52, 1, 10, "&eCave Spider &fSpawner", "&a$" + plugin.getConfig().getInt("CaveSpider"));
-		Utils.createItem(inv, 52, 1, 11, "&eVindicator &fSpawner", "&a$" + plugin.getConfig().getInt("Vindicator"));
-		Utils.createItem(inv, 52, 1, 12, "&eCow &fSpawner", "&a$" + plugin.getConfig().getInt("Cow"));
-		Utils.createItem(inv, 52, 1, 13, "&eRabbit &fSpawner", "&a$" + plugin.getConfig().getInt("Rabbit"));
-		Utils.createItem(inv, 52, 1, 14, "&eSheep &fSpawner", "&a$" + plugin.getConfig().getInt("Sheep"));
-		Utils.createItem(inv, 52, 1, 15, "&eHorse &fSpawner", "&a$" + plugin.getConfig().getInt("Horse"));
-		Utils.createItem(inv, 52, 1, 16, "&eBlaze &fSpawner", "&a$" + plugin.getConfig().getInt("Blaze"));
-		Utils.createItem(inv, 52, 1, 17, "&ePig &fSpawner", "&a$" + plugin.getConfig().getInt("Pig"));
-		Utils.createItem(inv, 52, 1, 18, "&eChicken &fSpawner", "&a$" + plugin.getConfig().getInt("Chicken"));
-		Utils.createItem(inv, 52, 1, 19, "&eSquid &fSpawner", "&a$" + plugin.getConfig().getInt("Squid"));
-		Utils.createItem(inv, 52, 1, 20, "&eWolf &fSpawner", "&a$" + plugin.getConfig().getInt("Wolf"));
-		Utils.createItem(inv, 52, 1, 21, "&eMooshroom &fSpawner", "&a$" + plugin.getConfig().getInt("Mooshroom"));
-		Utils.createItem(inv, 166, 1, 41, "&4Close Menu");
+		if (plugin.getConfig().getBoolean("CreeperSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 1, "&eCreeper &fSpawner", "&a$" + plugin.getConfig().getInt("Creeper"));
+		}
+		if (plugin.getConfig().getBoolean("SkeletonSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 2, "&eSkeleton &fSpawner", "&a$" + plugin.getConfig().getInt("Skeleton"));
+		}
+		if (plugin.getConfig().getBoolean("SpiderSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 3, "&eSpider &fSpawner", "&a$" + plugin.getConfig().getInt("Spider"));
+		}
+		if (plugin.getConfig().getBoolean("IronGolemSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 4, "&eIron Golem &fSpawner", "&a$" + plugin.getConfig().getInt("IronGolem"));
+		}
+		if (plugin.getConfig().getBoolean("ZombieSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 5, "&eZombie &fSpawner", "&a$" + plugin.getConfig().getInt("Zombie"));
+		}
+		if (plugin.getConfig().getBoolean("SlimeSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 6, "&eSlime &fSpawner", "&a$" + plugin.getConfig().getInt("Slime"));
+		}
+		if (plugin.getConfig().getBoolean("WitchSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 7, "&eWitch &fSpawner", "&a$" + plugin.getConfig().getInt("Witch"));
+		}
+		if (plugin.getConfig().getBoolean("ZombiePigmanSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 8, "&eZombie Pigman &fSpawner",
+					"&a$" + plugin.getConfig().getInt("ZombiePigman"));
+		}
+		if (plugin.getConfig().getBoolean("EndermanSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 9, "&eEnderman &fSpawner", "&a$" + plugin.getConfig().getInt("Enderman"));
+		}
+		if (plugin.getConfig().getBoolean("CaveSpiderSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 10, "&eCave Spider &fSpawner",
+					"&a$" + plugin.getConfig().getInt("CaveSpider"));
+		}
+		if (plugin.getConfig().getBoolean("VindicatorSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 11, "&eVindicator &fSpawner", "&a$" + plugin.getConfig().getInt("Vindicator"));
+		}
+		if (plugin.getConfig().getBoolean("CowSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 12, "&eCow &fSpawner", "&a$" + plugin.getConfig().getInt("Cow"));
+		}
+		if (plugin.getConfig().getBoolean("RabbitSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 13, "&eRabbit &fSpawner", "&a$" + plugin.getConfig().getInt("Rabbit"));
+		}
+		if (plugin.getConfig().getBoolean("SheepSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 14, "&eSheep &fSpawner", "&a$" + plugin.getConfig().getInt("Sheep"));
+		}
+		if (plugin.getConfig().getBoolean("HorseSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 15, "&eHorse &fSpawner", "&a$" + plugin.getConfig().getInt("Horse"));
+		}
+		if (plugin.getConfig().getBoolean("BlazeSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 16, "&eBlaze &fSpawner", "&a$" + plugin.getConfig().getInt("Blaze"));
+		}
+		if (plugin.getConfig().getBoolean("PigSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 17, "&ePig &fSpawner", "&a$" + plugin.getConfig().getInt("Pig"));
+		}
+		if (plugin.getConfig().getBoolean("ChickenSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 18, "&eChicken &fSpawner", "&a$" + plugin.getConfig().getInt("Chicken"));
+		}
+		if (plugin.getConfig().getBoolean("SquidSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 19, "&eSquid &fSpawner", "&a$" + plugin.getConfig().getInt("Squid"));
+		}
+		if (plugin.getConfig().getBoolean("WolfSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 20, "&eWolf &fSpawner", "&a$" + plugin.getConfig().getInt("Wolf"));
+		}
+		if (plugin.getConfig().getBoolean("MooshroomSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 21, "&eMooshroom &fSpawner", "&a$" + plugin.getConfig().getInt("Mooshroom"));
+		}
+		if (plugin.getConfig().getBoolean("WitherSkeletonSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 22, "&eWither Skeleton &fSpawner", "&a$" + plugin.getConfig().getInt("WitherSkeleton"));
+		}
+		if (plugin.getConfig().getBoolean("EnderDragonSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 23, "&eEnder Dragon &fSpawner", "&a$" + plugin.getConfig().getInt("EnderDragon"));
+		}
+		if (plugin.getConfig().getBoolean("WitherSpawner") == true) {
+			Utils.createItem(inv, Material.SPAWNER.toString(), 1, 24, "&eWither &fSpawner", "&a$" + plugin.getConfig().getInt("Wither"));
+		}
+		Utils.createItem(inv, Material.BARRIER.toString(), 1, 41, "&4Close Menu");
 
 		toReturn.setContents(inv.getContents());
 		return toReturn;
 	}
 
-	@SuppressWarnings({ "deprecation" })
+	@SuppressWarnings("deprecation")
 	public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv, JavaPlugin plugin) {
 		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&4Close Menu"))) {
 			p.closeInventory();
@@ -384,9 +437,51 @@ public class Main extends JavaPlugin {
 				p.sendMessage(Utils.chat("&cYou cannot afford this spawner."));
 			}
 		}
+		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&eWither Skeleton &fSpawner"))) {
+			EconomyResponse r = econ.withdrawPlayer(p.getName(), plugin.getConfig().getInt("WitherSkeleton"));
+			if (r.transactionSuccess()) {
+				for (String remove : plugin.getConfig().getStringList("witherskeleton")) {
+					Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
+							remove.replace("%player%", p.getName()));
+					p.sendMessage(Utils.chat(plugin.getConfig().getString("WitherSkeletonMsg")));
+					p.sendMessage(Utils.chat(
+							"&a$" + plugin.getConfig().getInt("WitherSkeleton") + " &ewas removed from your account."));
+				}
+			} else {
+				p.sendMessage(Utils.chat("&cYou cannot afford this spawner."));
+			}
+		}
+		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&eEnder Dragon &fSpawner"))) {
+			EconomyResponse r = econ.withdrawPlayer(p.getName(), plugin.getConfig().getInt("EnderDragon"));
+			if (r.transactionSuccess()) {
+				for (String remove : plugin.getConfig().getStringList("enderdragon")) {
+					Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
+							remove.replace("%player%", p.getName()));
+					p.sendMessage(Utils.chat(plugin.getConfig().getString("EnderDragonMsg")));
+					p.sendMessage(Utils.chat(
+							"&a$" + plugin.getConfig().getInt("EnderDragon") + " &ewas removed from your account."));
+				}
+			} else {
+				p.sendMessage(Utils.chat("&cYou cannot afford this spawner."));
+			}
+		}
+		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&eWither &fSpawner"))) {
+			EconomyResponse r = econ.withdrawPlayer(p.getName(), plugin.getConfig().getInt("Wither"));
+			if (r.transactionSuccess()) {
+				for (String remove : plugin.getConfig().getStringList("wither")) {
+					Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
+							remove.replace("%player%", p.getName()));
+					p.sendMessage(Utils.chat(plugin.getConfig().getString("WitherMsg")));
+					p.sendMessage(Utils.chat(
+							"&a$" + plugin.getConfig().getInt("WitherMsg") + " &ewas removed from your account."));
+				}
+			} else {
+				p.sendMessage(Utils.chat("&cYou cannot afford this spawner."));
+			}
+		}
 	}
 
-	// End of paste
+	// End of inventory
 	public void onDisable() {
 
 	}

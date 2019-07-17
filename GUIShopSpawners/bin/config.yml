@@ -1,6 +1,33 @@
 #This is what will show at the top of the GUIName
-#Example - GUIName: '&aSpawner &bShop'
+#For support add me on Discord @Darrion#5859
 GUIName: '&cSpawners'
+
+#Enabled Spawners in GUI
+#true/false
+CreeperSpawner: true
+SkeletonSpawner: true
+SpiderSpawner: true
+IronGolemSpawner: true
+ZombieSpawner: true
+SlimeSpawner: true
+WitchSpawner: true
+ZombiePigmanSpawner: true
+EndermanSpawner: true
+CaveSpiderSpawner: true
+VindicatorSpawner: true
+CowSpawner: true
+RabbitSpawner: true
+SheepSpawner: true
+HorseSpawner: true
+BlazeSpawner: true
+PigSpawner: true
+ChickenSpawner: true
+SquidSpawner: true
+WolfSpawner: true
+MooshroomSpawner: true
+WitherSkeletonSpawner: true
+EnderDragonSpawner: false
+WitherSpawner: false
 
 #Prices of Spawners
 Creeper: 750000
@@ -24,10 +51,12 @@ Chicken: 200000
 Squid: 200000
 Wolf: 200000
 Mooshroom: 350000
+WitherSkeleton: 750000
+EnderDragon: 10000000
+Wither: 10000000
 
 #Messages - Color Codes do work
 #Message Sent when a person buys a spawner
-#Example - ZombieMsg: 'You bought a spawner'
 CreeperMsg: '&aYou just purchased a &eCreeper Spawner'
 SkeletonMsg: '&aYou just purchased a &Skeleton Spawner'
 SpiderMsg: '&aYou just purchased a &eSpider Spawner'
@@ -49,50 +78,59 @@ ChickenMsg: '&aYou just purchased a &eChicken Spawner'
 SquidMsg: '&aYou just purchased a &eSquid Spawner'
 WolfMsg: '&aYou just purchased a &eWolf Spawner'
 MooshroomMsg: '&aYou just purchased a &eMooshroom Spawner'
+WitherSkeletonMsg: '&aYou just purchased a &eWither Skeleton Spawner'
+EnderDragonMsg: '&aYou just purchased an &eEnder Dragon Spawner'
+WitherMsg: '&aYou just purchased a &eWither Spawner'
 
 #Commands
 #This is configured for SilkSpawners; leave untouched if SilkSpawners is installed.
 #Commands ran (by console) to give players their spawner.
 #Use %player% for username of player
 creeper:
- - ss give %player% creeper 1
+ - spawnergive %player% creeper 1
 skeleton:
- - ss give %player% skeleton 1
+ - spawnergive %player% skeleton 1
 spider:
- - ss give %player% spider 1
+ - spawnergive %player% spider 1
 irongolem:
- - ss give %player% irongolem 1
+ - spawnergive %player% iron_golem 1
 zombie:
- - ss give %player% zombie 1
+ - spawnergive %player% zombie 1
 slime:
- - ss give %player% slime 1
+ - spawnergive %player% slime 1
 witch:
- - ss give %player% witch 1
+ - spawnergive %player% witch 1
 zombiepigman:
- - ss give %player% zombiepigman 1
+ - spawnergive %player% pig_zombie 1
 enderman:
- - ss give %player% enderman 1
+ - spawnergive %player% enderman 1
 cavespider:
- - ss give %player% cavespider 1
+ - spawnergive %player% cave_spider 1
 vindicator:
- - ss give %player% vindicator 1
+ - spawnergive %player% vindicator 1
 cow:
- - ss give %player% cow 1
+ - spawnergive %player% cow 1
 rabbit:
- - ss give %player% rabbit 1
+ - spawnergive %player% rabbit 1
 sheep:
- - ss give %player% sheep 1
+ - spawnergive %player% sheep 1
 horse:
- - ss give %player% horse 1
+ - spawnergive %player% horse 1
 blaze:
- - ss give %player% blaze 1
+ - spawnergive %player% blaze 1
 pig:
- - ss give %player% pig 1
+ - spawnergive %player% pig 1
 chicken:
- - ss give %player% chicken 1
+ - spawnergive %player% chicken 1
 squid:
- - ss give %player% squid 1
+ - spawnergive %player% squid 1
 wolf:
- - ss give %player% wolf 1
+ - spawnergive %player% wolf 1
 mooshroom:
- - ss give %player% mooshroom 1
+ - spawnergive %player% mushroom_cow 1
+witherskeleton:
+ - spawnergive %player% wither_skeleton 1
+enderdragon:
+ - spawnergive %player% ender_dragon 1
+wither:
+ - spawnergive %player% wither 1
