@@ -1,136 +1,196 @@
-#This is what will show at the top of the GUIName
-#For support add me on Discord @Darrion#5859
 GUIName: '&cSpawners'
+SellSpawnersEnabled: true
+Fill Item Enabled: true
+Fill Item ID: BLACK_STAINED_GLASS_PANE
+checkUpdates: true
 
-#Enabled Spawners in GUI
-#true/false
-CreeperSpawner: true
-SkeletonSpawner: true
-SpiderSpawner: true
-IronGolemSpawner: true
-ZombieSpawner: true
-SlimeSpawner: true
-WitchSpawner: true
-ZombiePigmanSpawner: true
-EndermanSpawner: true
-CaveSpiderSpawner: true
-VindicatorSpawner: true
-CowSpawner: true
-RabbitSpawner: true
-SheepSpawner: true
-HorseSpawner: true
-BlazeSpawner: true
-PigSpawner: true
-ChickenSpawner: true
-SquidSpawner: true
-WolfSpawner: true
-MooshroomSpawner: true
-WitherSkeletonSpawner: true
-EnderDragonSpawner: false
-WitherSpawner: false
-
-#Prices of Spawners
-Creeper: 750000
-Skeleton: 600000
-Spider: 500000
-IronGolem: 1500000
-Zombie: 600000
-Slime: 750000
-Witch: 1000000
-ZombiePigman: 800000
-Enderman: 800000
-CaveSpider: 500000
-Vindicator: 1250000
-Cow: 250000
-Rabbit: 250000
-Sheep: 250000
-Horse: 400000
-Blaze: 750000
-Pig: 250000
-Chicken: 200000
-Squid: 200000
-Wolf: 200000
-Mooshroom: 350000
-WitherSkeleton: 750000
-EnderDragon: 10000000
-Wither: 10000000
-
-#Messages - Color Codes do work
-#Message Sent when a person buys a spawner
-CreeperMsg: '&aYou just purchased a &eCreeper Spawner'
-SkeletonMsg: '&aYou just purchased a &Skeleton Spawner'
-SpiderMsg: '&aYou just purchased a &eSpider Spawner'
-IronGolemMsg: '&aYou just purchased an &eIron Golem Spawner'
-ZombieMsg: '&aYou just purchased a &eZombie Spawner'
-SlimeMsg: '&aYou just purchased a &eSlime Spawner'
-WitchMsg: '&aYou just purchased a &eWitch Spawner'
-ZombiePigmanMsg: '&aYou just purchased a &eZombie Pigman Spawner'
-EndermanMsg: '&aYou just purchased an &eEnderman Spawner'
-CaveSpiderMsg: '&aYou just purchased a &eCave Spider Spawner'
-VindicatorMsg: '&aYou just purchased a &eVindicator Spawner'
-CowMsg: '&aYou just purchased a &eCow Spawner'
-RabbitMsg: '&aYou just purchased a &eRabbit Spawner'
-SheepMsg: '&aYou just purchased a &eSheep Spawner'
-HorseMsg: '&aYou just purchased a &eHorse Spawner'
-BlazeMsg: '&aYou just purchased a &eBlaze Spawner'
-PigMsg: '&aYou just purchased a &ePig Spawner'
-ChickenMsg: '&aYou just purchased a &eChicken Spawner'
-SquidMsg: '&aYou just purchased a &eSquid Spawner'
-WolfMsg: '&aYou just purchased a &eWolf Spawner'
-MooshroomMsg: '&aYou just purchased a &eMooshroom Spawner'
-WitherSkeletonMsg: '&aYou just purchased a &eWither Skeleton Spawner'
-EnderDragonMsg: '&aYou just purchased an &eEnder Dragon Spawner'
-WitherMsg: '&aYou just purchased a &eWither Spawner'
-
-#Commands
-#This is configured for SilkSpawners; leave untouched if SilkSpawners is installed.
-#Commands ran (by console) to give players their spawner.
-#Use %player% for username of player
-creeper:
- - spawnergive %player% creeper 1
-skeleton:
- - spawnergive %player% skeleton 1
-spider:
- - spawnergive %player% spider 1
-irongolem:
- - spawnergive %player% iron_golem 1
-zombie:
- - spawnergive %player% zombie 1
-slime:
- - spawnergive %player% slime 1
-witch:
- - spawnergive %player% witch 1
-zombiepigman:
- - spawnergive %player% pig_zombie 1
-enderman:
- - spawnergive %player% enderman 1
-cavespider:
- - spawnergive %player% cave_spider 1
-vindicator:
- - spawnergive %player% vindicator 1
-cow:
- - spawnergive %player% cow 1
-rabbit:
- - spawnergive %player% rabbit 1
-sheep:
- - spawnergive %player% sheep 1
-horse:
- - spawnergive %player% horse 1
-blaze:
- - spawnergive %player% blaze 1
-pig:
- - spawnergive %player% pig 1
-chicken:
- - spawnergive %player% chicken 1
-squid:
- - spawnergive %player% squid 1
-wolf:
- - spawnergive %player% wolf 1
-mooshroom:
- - spawnergive %player% mushroom_cow 1
-witherskeleton:
- - spawnergive %player% wither_skeleton 1
-enderdragon:
- - spawnergive %player% ender_dragon 1
-wither:
- - spawnergive %player% wither 1
+Creeper:
+    Enabled: true
+    Slot: 1
+    Buy: 100
+    Sell: 50
+Skeleton:
+    Enabled: true
+    Slot: 2
+    Buy: 100
+    Sell: 50
+Spider:
+    Enabled: true
+    Slot: 3
+    Buy: 100
+    Sell: 50
+Iron_golem:
+    Enabled: true
+    Slot: 4
+    Buy: 100
+    Sell: 50
+Zombie:
+    Enabled: true
+    Slot: 5
+    Buy: 100
+    Sell: 50
+Slime:
+    Enabled: true
+    Slot: 6
+    Buy: 100
+    Sell: 50
+Witch:
+    Enabled: true
+    Slot: 7
+    Buy: 100
+    Sell: 50
+Zombie_pigman:
+    Enabled: true
+    Slot: 8
+    Buy: 100
+    Sell: 50
+Enderman:
+    Enabled: true
+    Slot: 9
+    Buy: 100
+    Sell: 50
+Cave_spider:
+    Enabled: true
+    Slot: 10
+    Buy: 100
+    Sell: 50
+Vindicator:
+    Enabled: true
+    Slot: 11
+    Buy: 100
+    Sell: 50
+Cow:
+    Enabled: true
+    Slot: 12
+    Buy: 100
+    Sell: 50
+Rabbit:
+    Enabled: true
+    Slot: 13
+    Buy: 100
+    Sell: 50
+Sheep:
+    Enabled: true
+    Slot: 14
+    Buy: 100
+    Sell: 50
+Horse:
+    Enabled: true
+    Slot: 15
+    Buy: 100
+    Sell: 50
+Blaze:
+    Enabled: true
+    Slot: 16
+    Buy: 100
+    Sell: 50
+Pig:
+    Enabled: true
+    Slot: 17
+    Buy: 100
+    Sell: 50
+Chicken:
+    Enabled: true
+    Slot: 18
+    Buy: 100
+    Sell: 50
+Squid:
+    Enabled: true
+    Slot: 19
+    Buy: 100
+    Sell: 50
+Wolf:
+    Enabled: true
+    Slot: 20
+    Buy: 100
+    Sell: 50
+Mooshroom:
+    Enabled: true
+    Slot: 21
+    Buy: 100
+    Sell: 50
+Wither_skeleton:
+    Enabled: true
+    Slot: 22
+    Buy: 100
+    Sell: 50
+Ender_dragon:
+    Enabled: true
+    Slot: 23
+    Buy: 100
+    Sell: 50
+Wither:
+    Enabled: true
+    Slot: 24
+    Buy: 100
+    Sell: 50
+Ghast:
+    Enabled: true
+    Slot: 25
+    Buy: 100
+    Sell: 50
+Guardian:
+    Enabled: true
+    Slot: 26
+    Buy: 100
+    Sell: 50
+Shulker:
+    Enabled: true
+    Slot: 27
+    Buy: 100
+    Sell: 50
+Ocelot:
+    Enabled: true
+    Slot: 28
+    Buy: 100
+    Sell: 50
+Polar_bear:
+    Enabled: true
+    Slot: 29
+    Buy: 100
+    Sell: 50
+Llama:
+    Enabled: true
+    Slot: 30
+    Buy: 100
+    Sell: 50
+Parrot:
+    Enabled: true
+    Slot: 31
+    Buy: 100
+    Sell: 50
+Turtle:
+    Enabled: true
+    Slot: 32
+    Buy: 100
+    Sell: 50
+Phantom:
+    Enabled: true
+    Slot: 33
+    Buy: 100
+    Sell: 50
+Drowned:
+    Enabled: true
+    Slot: 34
+    Buy: 100
+    Sell: 50
+Panda:
+    Enabled: true
+    Slot: 35
+    Buy: 100
+    Sell: 50
+Dolphin:
+    Enabled: true
+    Slot: 36
+    Buy: 100
+    Sell: 50
+Pillager:
+    Enabled: true
+    Slot: 37
+    Buy: 100
+    Sell: 50
+Villager:
+    Enabled: true
+    Slot: 38
+    Buy: 100
+    Sell: 50

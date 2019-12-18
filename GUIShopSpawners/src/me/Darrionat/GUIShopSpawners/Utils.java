@@ -15,14 +15,15 @@ public class Utils {
 		return ChatColor.translateAlternateColorCodes('&', s);
 
 	}
+	
 
-	public static ItemStack createItem(Inventory inv, String materialId, int amount, int invSlot, String displayName,
-			String... loreString) {
+	public static ItemStack createskullItem(Inventory inv, ItemStack skull, int amount, int invSlot, String displayName,
+			String ...loreString) {
 
 		ItemStack item;
-		List<String> lore = new ArrayList();
+		List<String> lore = new ArrayList<String>();
 
-		item = new ItemStack(Material.getMaterial(materialId), amount);
+		item = new ItemStack(skull);
 
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(Utils.chat(displayName));
@@ -36,13 +37,14 @@ public class Utils {
 
 	}
 
-	public static ItemStack createItemByte(Inventory inv, String materialId, int byteId, int amount, int invSlot,
+	@SuppressWarnings("deprecation")
+	public static ItemStack createItemByte(Inventory inv, Material materialId, int byteId, int amount, int invSlot,
 			String displayName, String... loreString) {
 
 		ItemStack item;
-		List<String> lore = new ArrayList();
+		List<String> lore = new ArrayList<String>();
 
-		item = new ItemStack(Material.getMaterial(materialId), amount, (short) byteId);
+		item = new ItemStack(materialId, amount, (short) byteId);
 
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(Utils.chat(displayName));
@@ -54,5 +56,24 @@ public class Utils {
 		inv.setItem(invSlot - 1, item);
 		return item;
 
+	}
+
+	public static ItemStack createItem(Inventory inv, Material materialId, int amount, int invSlot, String displayName,
+			String... loreString) {
+		ItemStack item;
+		List<String> lore = new ArrayList<String>();
+
+		item = new ItemStack(materialId, amount);
+
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(Utils.chat(displayName));
+		for (String s : loreString) {
+			lore.add(Utils.chat(s));
+		}
+		meta.setLore(lore);
+		item.setItemMeta(meta);
+		inv.setItem(invSlot - 1, item);
+		return item;
+		
 	}
 }
