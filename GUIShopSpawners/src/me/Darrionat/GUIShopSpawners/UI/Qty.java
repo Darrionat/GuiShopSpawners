@@ -119,6 +119,39 @@ public class Qty {
 			// Throws a memory error if it's above everything for some reason when a player
 			// clicks close menu/back.
 
+			//mob variable is the mob that they chose
+			//My code
+
+			//The player either hasn't bought this item before or they haven't bought any spawners at all
+			int max = mobSection.getInt("Max");
+			int playerMobQty = config.getInt("Players." + p.getName() + "." + mob);
+			
+			if(max != playerMobQty) {
+				if(playerMobQty == 0) {
+					if(max < 1) {
+						p.sendMessage("Sorry, but the amount that you are trying to buy puts you over the spawner limit!");
+						return;
+					}
+					config.set("Players." + p.getName() + "." + mob, 1);
+					plugin.saveConfig();
+				}else {
+					int beforeAdd = plugin.getConfig().getInt("Players." + p.getName() + "." + mob);
+					int qty = config.getInt("Players." + p.getName() + "." + mob) + 1;
+					
+					if(qty > max) {
+						p.sendMessage("Sorry, but the amount that you are trying to buy puts you over the spawner limit! You are at " + beforeAdd);
+						return;
+					}else {
+						config.set("Players." + p.getName() + "." + mob, qty);
+						plugin.saveConfig();
+					}
+					
+				}
+			}else {
+				p.sendMessage("Sorry, but you have already bought the max amount of spawners for this mob!");
+				return;
+			}
+			
 			EconomyResponse sell = Main.econ.withdrawPlayer(p.getName(), price);
 			if (sell.transactionSuccess()) {
 				if (mob == "Zombie_Pigman") {
@@ -134,6 +167,7 @@ public class Qty {
 				String successfulTransaction = messages.getMessage("successfulTransaction").replace("%amt%",
 						formatter.format(price));
 				p.sendMessage(Utils.chat(successfulTransaction));
+				
 				return;
 			} else {
 				p.sendMessage(Utils.chat(notEnoughMoney));
@@ -144,6 +178,39 @@ public class Qty {
 		}
 		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&ePurchase &a2 &eSpawners"))) {
 
+			//mob variable is the mob that they chose
+			//My code
+
+			//The player either hasn't bought this item before or they haven't bought any spawners at all
+			int max = mobSection.getInt("Max");
+			int playerMobQty = config.getInt("Players." + p.getName() + "." + mob);
+			
+			if(max != playerMobQty) {
+				if(playerMobQty == 0) {
+					if(max < 2) {
+						p.sendMessage("Sorry, but the amount that you are trying to buy puts you over the spawner limit!");
+						return;
+					}
+					config.set("Players." + p.getName() + "." + mob, 2);
+					plugin.saveConfig();
+				}else {
+					int beforeAdd = plugin.getConfig().getInt("Players." + p.getName() + "." + mob);
+					int qty = config.getInt("Players." + p.getName() + "." + mob) + 2;
+					
+					if(qty > max) {
+						p.sendMessage("Sorry, but the amount that you are trying to buy puts you over the spawner limit! You are at " + beforeAdd);
+						return;
+					}else {
+						config.set("Players." + p.getName() + "." + mob, qty);
+						plugin.saveConfig();
+					}
+					
+				}
+			}else {
+				p.sendMessage("Sorry, but you have already bought the max amount of spawners for this mob!");
+				return;
+			}
+			
 			EconomyResponse sell = Main.econ.withdrawPlayer(p.getName(), price * 2);
 			if (sell.transactionSuccess()) {
 				if (mob == "Zombie_Pigman") {
@@ -168,7 +235,40 @@ public class Qty {
 			}
 		}
 		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&ePurchase &a8 &eSpawners"))) {
+			
+			//mob variable is the mob that they chose
+			//My code
 
+			//The player either hasn't bought this item before or they haven't bought any spawners at all
+			int max = mobSection.getInt("Max");
+			int playerMobQty = config.getInt("Players." + p.getName() + "." + mob);
+			
+			if(max != playerMobQty) {
+				if(playerMobQty == 0) {
+					if(max < 8) {
+						p.sendMessage("Sorry, but the amount that you are trying to buy puts you over the spawner limit!");
+						return;
+					}
+					config.set("Players." + p.getName() + "." + mob, 8);
+					plugin.saveConfig();
+				}else {
+					int beforeAdd = plugin.getConfig().getInt("Players." + p.getName() + "." + mob);
+					int qty = config.getInt("Players." + p.getName() + "." + mob) + 8;
+					
+					if(qty > max) {
+						p.sendMessage("Sorry, but the amount that you are trying to buy puts you over the spawner limit! You are at " + beforeAdd);
+						return;
+					}else {
+						config.set("Players." + p.getName() + "." + mob, qty);
+						plugin.saveConfig();
+					}
+					
+				}
+			}else {
+				p.sendMessage("Sorry, but you have already bought the max amount of spawners for this mob!");
+				return;
+			}
+			
 			EconomyResponse sell = Main.econ.withdrawPlayer(p.getName(), price * 8);
 			if (sell.transactionSuccess()) {
 				if (mob == "Zombie_Pigman") {
@@ -194,6 +294,39 @@ public class Qty {
 		}
 		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&ePurchase &a32 &eSpawners"))) {
 
+			//mob variable is the mob that they chose
+			//My code
+
+			//The player either hasn't bought this item before or they haven't bought any spawners at all
+			int max = mobSection.getInt("Max");
+			int playerMobQty = config.getInt("Players." + p.getName() + "." + mob);
+			
+			if(max != playerMobQty) {
+				if(playerMobQty == 0) {
+					if(max < 32) {
+						p.sendMessage("Sorry, but the amount that you are trying to buy puts you over the spawner limit!");
+						return;
+					}
+					config.set("Players." + p.getName() + "." + mob, 32);
+					plugin.saveConfig();
+				}else {
+					int beforeAdd = plugin.getConfig().getInt("Players." + p.getName() + "." + mob);
+					int qty = config.getInt("Players." + p.getName() + "." + mob) + 32;
+					
+					if(qty > max) {
+						p.sendMessage("Sorry, but the amount that you are trying to buy puts you over the spawner limit! You are at " + beforeAdd);
+						return;
+					}else {
+						config.set("Players." + p.getName() + "." + mob, qty);
+						plugin.saveConfig();
+					}
+					
+				}
+			}else {
+				p.sendMessage("Sorry, but you have already bought the max amount of spawners for this mob!");
+				return;
+			}
+			
 			EconomyResponse sell = Main.econ.withdrawPlayer(p.getName(), price * 32);
 			if (sell.transactionSuccess()) {
 				if (mob == "Zombie_Pigman") {
@@ -219,6 +352,39 @@ public class Qty {
 		}
 		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&ePurchase &a64 &eSpawners"))) {
 
+			//mob variable is the mob that they chose
+			//My code
+
+			//The player either hasn't bought this item before or they haven't bought any spawners at all
+			int max = mobSection.getInt("Max");
+			int playerMobQty = config.getInt("Players." + p.getName() + "." + mob);
+			
+			if(max != playerMobQty) {
+				if(playerMobQty == 0) {
+					if(max < 64) {
+						p.sendMessage("Sorry, but the amount that you are trying to buy puts you over the spawner limit!");
+						return;
+					}
+					config.set("Players." + p.getName() + "." + mob, 64);
+					plugin.saveConfig();
+				}else {
+					int beforeAdd = plugin.getConfig().getInt("Players." + p.getName() + "." + mob);
+					int qty = config.getInt("Players." + p.getName() + "." + mob) + 64;
+					
+					if(qty > max) {
+						p.sendMessage("Sorry, but the amount that you are trying to buy puts you over the spawner limit! You are at " + beforeAdd);
+						return;
+					}else {
+						config.set("Players." + p.getName() + "." + mob, qty);
+						plugin.saveConfig();
+					}
+					
+				}
+			}else {
+				p.sendMessage("Sorry, but you have already bought the max amount of spawners for this mob!");
+				return;
+			}
+			
 			EconomyResponse sell = Main.econ.withdrawPlayer(p.getName(), price * 64);
 			if (sell.transactionSuccess()) {
 				if (mob == "Zombie_Pigman") {
