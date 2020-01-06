@@ -1,6 +1,7 @@
 package me.Darrionat.GUIShopSpawners.Listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,12 +10,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import me.Darrionat.GUIShopSpawners.Main;
 import me.Darrionat.GUIShopSpawners.UpdateChecker;
 import me.Darrionat.GUIShopSpawners.Utils;
-import me.Darrionat.GUIShopSpawners.Files.ConfigManager;
+import me.Darrionat.GUIShopSpawners.Files.FileManager;
 
 public class PlayerJoin implements Listener {
 
 	private Main plugin;
-	private static ConfigManager messages;
 
 	public PlayerJoin(Main plugin) {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -23,7 +23,8 @@ public class PlayerJoin implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		messages = new ConfigManager((Main) plugin);
+		FileManager fileManager = new FileManager((Main) plugin);
+		FileConfiguration messages = fileManager.getDataConfig("messages");
 
 		if (plugin.getConfig().getBoolean("checkUpdates") != true) {
 			return;
@@ -39,9 +40,8 @@ public class PlayerJoin implements Listener {
 
 					public void run() {
 						String version = "v" + plugin.getDescription().getVersion();
-						String currentVersionMsg = messages.getMessage("updatePt1").replace("%CurrentVersion%",
-								version);
-						String updateAvailable = messages.getMessage("updatePt2").replace("%UpdatedVersion%",
+						String currentVersionMsg = messages.getString("updatePt1").replace("%CurrentVersion%", version);
+						String updateAvailable = messages.getString("updatePt2").replace("%UpdatedVersion%",
 								UpdateChecker.getLatestVersion());
 						p.sendMessage(Utils.chat(currentVersionMsg));
 						p.sendMessage(Utils.chat(updateAvailable));

@@ -14,12 +14,11 @@ import org.bukkit.entity.Player;
 import me.Darrionat.GUIShopSpawners.Main;
 import me.Darrionat.GUIShopSpawners.Maps;
 import me.Darrionat.GUIShopSpawners.Utils;
-import me.Darrionat.GUIShopSpawners.Files.ConfigManager;
+import me.Darrionat.GUIShopSpawners.Files.FileManager;
 
 public class Spawners implements CommandExecutor {
 
 	private Main plugin;
-	private static ConfigManager messages;
 
 	public Spawners(Main plugin) {
 		this.plugin = plugin;
@@ -28,12 +27,14 @@ public class Spawners implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		messages = new ConfigManager((Main) plugin);
-		String noPermission = messages.getMessage("noPermission");
+
+		FileManager fileManager = new FileManager((Main) plugin);
+		FileConfiguration messages = fileManager.getDataConfig("messages");
+		String noPermission = messages.getString("noPermission");
 
 		String reloadPerm = "guishopspawners.reload";
 		String adminPerm = "guishopspawners.admin";
-		String useNumbersError = messages.getMessage("useNumbersError");
+		String useNumbersError = messages.getString("useNumbersError");
 		Maps map = new Maps();
 		HashMap<Integer, String> mobs = map.getMobMap();
 		FileConfiguration config = plugin.getConfig();
@@ -251,7 +252,7 @@ public class Spawners implements CommandExecutor {
 		}
 		if (args.length == 0) {
 			if (!(sender instanceof Player)) {
-				String consoleAttemptOpen = messages.getMessage("consoleAttemptOpen");
+				String consoleAttemptOpen = messages.getString("consoleAttemptOpen");
 				sender.sendMessage(Utils.chat(consoleAttemptOpen));
 				return true;
 			}
@@ -259,7 +260,7 @@ public class Spawners implements CommandExecutor {
 
 			String shopPerm = "guishopspawners.shop";
 			if (p.hasPermission(shopPerm)) {
-				String openingGUI = messages.getMessage("openingGUI");
+				String openingGUI = messages.getString("openingGUI");
 				p.sendMessage(Utils.chat(openingGUI));
 				p.openInventory(Main.GUI(p, plugin));
 				// Just to refresh/update the inventory.

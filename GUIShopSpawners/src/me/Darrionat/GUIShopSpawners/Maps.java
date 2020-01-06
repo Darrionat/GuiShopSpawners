@@ -64,7 +64,7 @@ public class Maps {
 		sellmobs.put(5, "Zombie");
 		sellmobs.put(6, "Slime");
 		sellmobs.put(7, "Witch");
-		sellmobs.put(8, "Zombie_pigman");
+		sellmobs.put(8, "Pig_zombie");
 		sellmobs.put(9, "Enderman");
 		sellmobs.put(10, "Cave_spider");
 		sellmobs.put(11, "Vindicator");
@@ -97,7 +97,7 @@ public class Maps {
 		sellmobs.put(38, "Villager");
 
 		sellmobs.put(39, "Iron golem");
-		sellmobs.put(40, "Zombie pigman");
+		sellmobs.put(40, "Pig zombie");
 		sellmobs.put(41, "Cave spider");
 		sellmobs.put(42, "Mushroom cow");
 		sellmobs.put(43, "Wither skeleton");

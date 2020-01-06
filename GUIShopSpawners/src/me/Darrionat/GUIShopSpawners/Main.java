@@ -20,7 +20,6 @@ import com.mojang.authlib.properties.Property;
 
 import me.Darrionat.GUIShopSpawners.Commands.Sellspawners;
 import me.Darrionat.GUIShopSpawners.Commands.Spawners;
-import me.Darrionat.GUIShopSpawners.Files.ConfigManager;
 import me.Darrionat.GUIShopSpawners.Listeners.InventoryClick;
 import me.Darrionat.GUIShopSpawners.Listeners.PlayerJoin;
 import me.Darrionat.GUIShopSpawners.UI.Qty;
@@ -30,11 +29,9 @@ import net.milkbowl.vault.economy.Economy;
 public class Main extends JavaPlugin {
 
 	public static Economy econ = null;
-	private ConfigManager cfgm;
 
 	@Override
 	public void onEnable() {
-		loadConfigManager();
 		if (!setupEconomy()) {
 			getLogger().severe(
 					String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
@@ -67,6 +64,7 @@ public class Main extends JavaPlugin {
 
 		saveDefaultConfig();
 		loadConfig();
+		this.saveResource("messages.yml", false);
 
 		if (getConfig().getBoolean("checkUpdates") == true) {
 			UpdateChecker updater = new UpdateChecker(this, 69279);
@@ -94,12 +92,6 @@ public class Main extends JavaPlugin {
 	public void loadConfig() {
 		getConfig().options().copyDefaults(true);
 		saveConfig();
-	}
-
-	public void loadConfigManager() {
-		cfgm = new ConfigManager(this);
-		cfgm.setup();
-		cfgm.reloadMessages();
 	}
 
 	private boolean setupEconomy() {

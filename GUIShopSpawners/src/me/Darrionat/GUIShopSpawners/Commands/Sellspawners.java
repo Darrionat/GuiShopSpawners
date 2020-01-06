@@ -7,19 +7,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.Darrionat.GUIShopSpawners.Main;
 import me.Darrionat.GUIShopSpawners.Maps;
 import me.Darrionat.GUIShopSpawners.Utils;
-import me.Darrionat.GUIShopSpawners.Files.ConfigManager;
+import me.Darrionat.GUIShopSpawners.Files.FileManager;
 import net.milkbowl.vault.economy.EconomyResponse;
 
 public class Sellspawners implements CommandExecutor {
 
 	private Main plugin;
-	private static ConfigManager messages;
 
 	public Sellspawners(Main plugin) {
 		this.plugin = plugin;
@@ -29,17 +29,19 @@ public class Sellspawners implements CommandExecutor {
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		messages = new ConfigManager((Main) plugin);
-		String noPermission = messages.getMessage("noPermission");
+
+		FileManager fileManager = new FileManager((Main) plugin);
+		FileConfiguration messages = fileManager.getDataConfig("messages");
+		String noPermission = messages.getString("noPermission");
 		ConfigurationSection config = plugin.getConfig();
 
 		if (config.getBoolean("SellSpawnersEnabled") == false) {
-			String sellingDisabled = messages.getMessage("sellingDisabled");
+			String sellingDisabled = messages.getString("sellingDisabled");
 			sender.sendMessage(Utils.chat(sellingDisabled));
 			return true;
 		}
 		if (!(sender instanceof Player)) {
-			String consoleAttemptSell = messages.getMessage("consoleAttemptSell");
+			String consoleAttemptSell = messages.getString("consoleAttemptSell");
 			sender.sendMessage(Utils.chat(consoleAttemptSell));
 			return true;
 		}
@@ -52,7 +54,7 @@ public class Sellspawners implements CommandExecutor {
 		ItemStack hand = p.getItemInHand();
 		Integer amt = hand.getAmount();
 		if (hand.getType() != Material.SPAWNER) {
-			String notASpawner = messages.getMessage("notASpawner");
+			String notASpawner = messages.getString("notASpawner");
 			p.sendMessage(Utils.chat(notASpawner));
 			return true;
 		}
@@ -78,7 +80,7 @@ public class Sellspawners implements CommandExecutor {
 				hand.setAmount(0);
 				p.sendMessage(Utils.chat("&aYou just sold x" + amt + "&e " + mob + " Spawner &afor $" + total));
 			} else {
-				String generalError = messages.getMessage("generalError");
+				String generalError = messages.getString("generalError");
 				p.sendMessage(Utils.chat(generalError));
 				System.out.println(Utils.chat("&c[GUIShopSpawners] " + p
 						+ "'s economy deposit failed, do you have economy plugins (Like Vault and Essentials)? Contact Darrion (the developer) of this plugin."));

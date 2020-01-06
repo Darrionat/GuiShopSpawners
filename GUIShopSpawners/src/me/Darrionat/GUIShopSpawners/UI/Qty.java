@@ -1,9 +1,13 @@
 package me.Darrionat.GUIShopSpawners.UI;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -11,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Darrionat.GUIShopSpawners.Main;
 import me.Darrionat.GUIShopSpawners.Utils;
-import me.Darrionat.GUIShopSpawners.Files.ConfigManager;
+import me.Darrionat.GUIShopSpawners.Files.FileManager;
 import net.milkbowl.vault.economy.EconomyResponse;
 
 public class Qty {
@@ -19,7 +23,6 @@ public class Qty {
 	public static Main plugin;
 	public static String mob;
 	public static ItemStack skull;
-	private static ConfigManager messages;
 
 	public Qty(Main plugin, String mob, ItemStack skull) {
 		Qty.plugin = plugin;
@@ -64,21 +67,18 @@ public class Qty {
 				"&cSell: $" + formatter.format(sellprice));
 
 		Material redglasspane = Material.RED_STAINED_GLASS_PANE;
-
-		Utils.createItem(inv, redglasspane, 1, 19, "&ePurchase &a1 &eSpawner", "&aBuy: $" + formatter.format(price),
-				"&cSell: $" + formatter.format(sellprice));
-
-		Utils.createItem(inv, redglasspane, 2, 21, "&ePurchase &a2 &eSpawners",
-				"&aBuy: $" + formatter.format(price * 2), "&cSell: $" + formatter.format(sellprice * 2));
-
-		Utils.createItem(inv, redglasspane, 8, 23, "&ePurchase &a8 &eSpawners",
-				"&aBuy: $" + formatter.format(price * 8), "&cSell: $" + formatter.format(sellprice * 8));
-
-		Utils.createItem(inv, redglasspane, 32, 25, "&ePurchase &a32 &eSpawners",
-				"&aBuy: $" + formatter.format(price * 32), "&cSell: $" + formatter.format(sellprice * 32));
-
-		Utils.createItem(inv, redglasspane, 64, 27, "&ePurchase &a64 &eSpawners",
-				"&aBuy: $" + formatter.format(price * 64), "&cSell: $" + formatter.format(sellprice * 64));
+		List<Integer> qtys = new ArrayList<Integer>();
+		qtys.add(1);
+		qtys.add(2);
+		qtys.add(8);
+		qtys.add(32);
+		qtys.add(64);
+		int slot = 19;
+		for (int qty : qtys) {
+			Utils.createItem(inv, redglasspane, 1, slot, "&ePurchase &a" + qty + " &eSpawners",
+					"&aBuy: $" + formatter.format(price * qty), "&cSell: $" + formatter.format(sellprice * qty));
+			slot = slot + 2;
+		}
 
 		if (p.hasPermission("guishopspawners.sell")) {
 			Utils.createItem(inv, Material.HOPPER, 1, 51, "&cSell spawners in hand");
@@ -91,11 +91,8 @@ public class Qty {
 		return toReturn;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv, JavaPlugin plugin) {
 
-		messages = new ConfigManager((Main) plugin);
-		String notEnoughMoney = messages.getMessage("notEnoughMoney");
 		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&7Go Back"))) {
 			p.closeInventory();
 			p.openInventory(Main.GUI(p, plugin));
@@ -111,160 +108,75 @@ public class Qty {
 		}
 		// Quantity clicks
 
+		purchaseSpawner(clicked, p, plugin);
+	}
+
+	private static void purchaseSpawner(ItemStack clicked, Player p, JavaPlugin plugin) {
+		FileManager fileManager = new FileManager((Main) plugin);
+		FileConfiguration messages = fileManager.getDataConfig("messages");
 		DecimalFormat formatter = new DecimalFormat("#,###");
 		ConfigurationSection config = plugin.getConfig();
 		ConfigurationSection mobSection = config.getConfigurationSection(mob);
 		int price = mobSection.getInt("Buy");
-		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&ePurchase &a1 &eSpawner"))) {
-			// Throws a memory error if it's above everything for some reason when a player
-			// clicks close menu/back.
-
-			EconomyResponse sell = Main.econ.withdrawPlayer(p.getName(), price);
-			if (sell.transactionSuccess()) {
-				if (mob == "Zombie_Pigman") {
-					Qty.zombiePigman(p, 1);
-					return;
-				}
-				if (mob == "Mooshroom") {
-					Qty.mooshroom(p, 1);
-					return;
-				}
-				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-						"spawnergive " + p.getName() + " " + mob + " 1");
-				String successfulTransaction = messages.getMessage("successfulTransaction").replace("%amt%",
-						formatter.format(price));
-				p.sendMessage(Utils.chat(successfulTransaction));
-				return;
-			} else {
-				p.sendMessage(Utils.chat(notEnoughMoney));
-				System.out.println(Utils.chat("&c[" + plugin.getName() + "] " + p.getName()
-						+ " attempted to purchase a " + mob + " spawner without having enough money."));
+		String notEnoughMoney = messages.getString("notEnoughMoney");
+		if (!clicked.getItemMeta().getDisplayName().contains("Purchase ")) {
+			return;
+		}
+		int qty = Integer.parseInt(clicked.getItemMeta().getDisplayName().replace(Utils.chat("&ePurchase &a"), "")
+				.replace(Utils.chat(" &eSpawners"), ""));
+		@SuppressWarnings("deprecation")
+		EconomyResponse sell = Main.econ.withdrawPlayer(p.getName(), price * qty);
+		if (sell.transactionSuccess()) {
+			if (mob.equalsIgnoreCase("Zombie_Pigman")) {
+				Qty.zombiePigman(p, qty, plugin);
 				return;
 			}
-		}
-		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&ePurchase &a2 &eSpawners"))) {
-
-			EconomyResponse sell = Main.econ.withdrawPlayer(p.getName(), price * 2);
-			if (sell.transactionSuccess()) {
-				if (mob == "Zombie_Pigman") {
-					Qty.zombiePigman(p, 2);
-					return;
-				}
-				if (mob == "Mooshroom") {
-					Qty.mooshroom(p, 2);
-					return;
-				}
-				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-						"spawnergive " + p.getName() + " " + mob + " 2");
-				String successfulTransaction = messages.getMessage("successfulTransaction").replace("%amt%",
-						formatter.format(price * 2));
-				p.sendMessage(Utils.chat(successfulTransaction));
-				return;
-			} else {
-				p.sendMessage(Utils.chat(notEnoughMoney));
-				System.out.println(Utils.chat("&c[" + plugin.getName() + "] " + p.getName()
-						+ " attempted to purchase 2 " + mob + " spawners without having enough money."));
+			if (mob == "Mooshroom") {
+				Qty.mooshroom(p, qty, plugin);
 				return;
 			}
+			p.sendMessage("spawnergive " + p.getName() + " " + mob + " " + qty);
+			Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
+					"spawnergive " + p.getName() + " " + mob + " " + qty);
+			String successfulTransaction = messages.getString("successfulTransaction").replace("%amt%",
+					formatter.format(price * qty));
+			p.sendMessage(Utils.chat(successfulTransaction));
+			return;
+		} else {
+			p.sendMessage(Utils.chat(notEnoughMoney));
+			System.out.println(Utils.chat("&c[" + plugin.getName() + "] " + p.getName() + " attempted to purchase "
+					+ qty + " " + mob + " spawners without having enough money."));
+			return;
 		}
-		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&ePurchase &a8 &eSpawners"))) {
 
-			EconomyResponse sell = Main.econ.withdrawPlayer(p.getName(), price * 8);
-			if (sell.transactionSuccess()) {
-				if (mob == "Zombie_Pigman") {
-					Qty.zombiePigman(p, 8);
-					return;
-				}
-				if (mob == "Mooshroom") {
-					Qty.mooshroom(p, 8);
-					return;
-				}
-				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-						"spawnergive " + p.getName() + " " + mob + " 8");
-				String successfulTransaction = messages.getMessage("successfulTransaction").replace("%amt%",
-						formatter.format(price * 8));
-				p.sendMessage(Utils.chat(successfulTransaction));
-				return;
-			} else {
-				p.sendMessage(Utils.chat(notEnoughMoney));
-				System.out.println(Utils.chat("&c[" + plugin.getName() + "] " + p.getName()
-						+ " attempted to purchase 8 " + mob + " spawners without having enough money."));
-				return;
-			}
-		}
-		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&ePurchase &a32 &eSpawners"))) {
-
-			EconomyResponse sell = Main.econ.withdrawPlayer(p.getName(), price * 32);
-			if (sell.transactionSuccess()) {
-				if (mob == "Zombie_Pigman") {
-					Qty.zombiePigman(p, 32);
-					return;
-				}
-				if (mob == "Mooshroom") {
-					Qty.mooshroom(p, 32);
-					return;
-				}
-				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-						"spawnergive " + p.getName() + " " + mob + " 32");
-				String successfulTransaction = messages.getMessage("successfulTransaction").replace("%amt%",
-						formatter.format(price * 32));
-				p.sendMessage(Utils.chat(successfulTransaction));
-				return;
-			} else {
-				p.sendMessage(Utils.chat(notEnoughMoney));
-				System.out.println(Utils.chat("&c[" + plugin.getName() + "] " + p.getName()
-						+ " attempted to purchase 32 " + mob + " spawners without having enough money."));
-				return;
-			}
-		}
-		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&ePurchase &a64 &eSpawners"))) {
-
-			EconomyResponse sell = Main.econ.withdrawPlayer(p.getName(), price * 64);
-			if (sell.transactionSuccess()) {
-				if (mob == "Zombie_Pigman") {
-					Qty.zombiePigman(p, 64);
-					return;
-				}
-				if (mob == "Mooshroom") {
-					Qty.mooshroom(p, 64);
-					return;
-				}
-				Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-						"spawnergive " + p.getName() + " " + mob + " 64");
-				String successfulTransaction = messages.getMessage("successfulTransaction").replace("%amt%",
-						formatter.format(price * 64));
-				p.sendMessage(Utils.chat(successfulTransaction));
-				return;
-			} else {
-				p.sendMessage(Utils.chat(notEnoughMoney));
-				System.out.println(Utils.chat("&c[" + plugin.getName() + "] " + p.getName()
-						+ " attempted to purchase 64 " + mob + " spawners without having enough money."));
-				return;
-			}
-		}
 	}
 
-	public static void zombiePigman(Player p, int qty) {
+	public static void zombiePigman(Player p, int qty, JavaPlugin plugin) {
 		ConfigurationSection config = plugin.getConfig();
+		FileManager fileManager = new FileManager((Main) plugin);
+		FileConfiguration messages = fileManager.getDataConfig("messages");
 		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
 				"spawnergive " + p.getName() + " pig_zombie " + qty);
+		p.sendMessage("spawnergive " + p.getName() + " pig_zombie " + qty);
 		DecimalFormat formatter = new DecimalFormat("#,###");
 
-		int price = config.getConfigurationSection("Zombie_Pigman").getInt("Buy") * qty;
-		String successfulTransaction = messages.getMessage("successfulTransaction").replace("%amt%",
+		int price = config.getConfigurationSection("Zombie_pigman").getInt("Buy") * qty;
+		String successfulTransaction = messages.getString("successfulTransaction").replace("%amt%",
 				formatter.format(price));
 		p.sendMessage(Utils.chat(successfulTransaction));
 		return;
 	}
 
-	public static void mooshroom(Player p, int qty) {
+	public static void mooshroom(Player p, int qty, JavaPlugin plugin) {
 		ConfigurationSection config = plugin.getConfig();
+		FileManager fileManager = new FileManager((Main) plugin);
+		FileConfiguration messages = fileManager.getDataConfig("messages");
 		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
 				"spawnergive " + p.getName() + " mushroom_cow " + qty);
 		DecimalFormat formatter = new DecimalFormat("#,###");
 
 		int price = config.getConfigurationSection("Mooshroom").getInt("Buy") * qty;
-		String successfulTransaction = messages.getMessage("successfulTransaction").replace("%amt%",
+		String successfulTransaction = messages.getString("successfulTransaction").replace("%amt%",
 				formatter.format(price));
 		p.sendMessage(Utils.chat(successfulTransaction));
 	}

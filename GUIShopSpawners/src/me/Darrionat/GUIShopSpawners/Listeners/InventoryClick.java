@@ -19,13 +19,20 @@ public class InventoryClick implements Listener {
 	@EventHandler
 	public void onClick(InventoryClickEvent e) {
 		String title = e.getView().getTitle();
-		if (title.equals(Main.inventory_name) || title.equals(Qty.inventory_name)) {
+		if (title.equals(Main.inventory_name)) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
 			}
 			Main.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory(), plugin);
+		}
+		if (title.equals(Qty.inventory_name)) {
+			e.setCancelled(true);
+			if (e.getCurrentItem() == null) {
+				return;
+			}
 			Qty.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory(), plugin);
 		}
+
 	}
 }
