@@ -1,6 +1,5 @@
 package me.Darrionat.GUIShopSpawners.UI;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +52,7 @@ public class Qty {
 		ConfigurationSection mobSection = config.getConfigurationSection(mob);
 		int price = mobSection.getInt("Buy");
 		int sellprice = mobSection.getInt("Sell");
-		DecimalFormat formatter = new DecimalFormat("#,###");
+		// DecimalFormat formatter = new DecimalFormat("#,###");
 		String fillItemID = config.getString("Fill Item ID").toUpperCase();
 		Material fillItemMaterial = Material.getMaterial(fillItemID);
 
@@ -63,8 +62,8 @@ public class Qty {
 			}
 		}
 
-		Utils.createskullItem(inv, skull, 1, 5, "&e" + mob + " &fSpawner", "&aBuy: $" + formatter.format(price),
-				"&cSell: $" + formatter.format(sellprice));
+		Utils.createskullItem(inv, skull, 1, 5, "&e" + mob + " &fSpawner", "&aBuy: $" + (price),
+				"&cSell: $" + (sellprice));
 
 		Material redglasspane = Material.RED_STAINED_GLASS_PANE;
 		List<Integer> qtys = new ArrayList<Integer>();
@@ -76,16 +75,15 @@ public class Qty {
 		int slot = 19;
 		for (int qty : qtys) {
 			Utils.createItem(inv, redglasspane, 1, slot, "&ePurchase &a" + qty + " &eSpawners",
-					"&aBuy: $" + formatter.format(price * qty), "&cSell: $" + formatter.format(sellprice * qty));
+					"&aBuy: $" + (price * qty), "&cSell: $" + (sellprice * qty));
 			slot = slot + 2;
 		}
 
 		if (p.hasPermission("guishopspawners.sell")) {
-			Utils.createItem(inv, Material.HOPPER, 1, 51, "&cSell spawners in hand");
+			Utils.createItem(inv, Material.HOPPER, 1, 51, Utils.chat(config.getString("SellSpawnerItem")));
 		}
-
-		Utils.createItem(inv, Material.ARROW, 1, 49, "&7Go Back");
-		Utils.createItem(inv, Material.NETHER_STAR, 1, 50, "&eClose Menu");
+		Utils.createItem(inv, Material.NETHER_STAR, 1, 50, Utils.chat(config.getString(("CloseMenuItem"))));
+		Utils.createItem(inv, Material.ARROW, 1, 49, Utils.chat(config.getString("GoBackItem")));
 
 		toReturn.setContents(inv.getContents());
 		return toReturn;
@@ -93,16 +91,18 @@ public class Qty {
 
 	public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv, JavaPlugin plugin) {
 
-		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&7Go Back"))) {
+		if (clicked.getItemMeta().getDisplayName()
+				.equalsIgnoreCase(Utils.chat(plugin.getConfig().getString("GoBackItem")))) {
 			p.closeInventory();
 			p.openInventory(Main.GUI(p, plugin));
 			return;
 		}
-		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&eClose Menu"))) {
+		if (clicked.getItemMeta().getDisplayName()
+				.equalsIgnoreCase(Utils.chat(plugin.getConfig().getString("CloseMenuItem")))) {
 			p.closeInventory();
-			return;
 		}
-		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&cSell spawners in hand"))) {
+		if (clicked.getItemMeta().getDisplayName()
+				.equalsIgnoreCase(Utils.chat(plugin.getConfig().getString("SellSpawnerItem")))) {
 			p.chat("/sellspawner");
 			return;
 		}
@@ -114,7 +114,7 @@ public class Qty {
 	private static void purchaseSpawner(ItemStack clicked, Player p, JavaPlugin plugin) {
 		FileManager fileManager = new FileManager((Main) plugin);
 		FileConfiguration messages = fileManager.getDataConfig("messages");
-		DecimalFormat formatter = new DecimalFormat("#,###");
+		// DecimalFormat formatter = new DecimalFormat("#,###");
 		ConfigurationSection config = plugin.getConfig();
 		ConfigurationSection mobSection = config.getConfigurationSection(mob);
 		int price = mobSection.getInt("Buy");
@@ -135,17 +135,18 @@ public class Qty {
 				Qty.mooshroom(p, qty, plugin);
 				return;
 			}
-			p.sendMessage("spawnergive " + p.getName() + " " + mob + " " + qty);
 			Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
 					"spawnergive " + p.getName() + " " + mob + " " + qty);
 			String successfulTransaction = messages.getString("successfulTransaction").replace("%amt%",
-					formatter.format(price * qty));
+					String.valueOf(price * qty));
 			p.sendMessage(Utils.chat(successfulTransaction));
+			p.closeInventory();
 			return;
 		} else {
 			p.sendMessage(Utils.chat(notEnoughMoney));
 			System.out.println(Utils.chat("&c[" + plugin.getName() + "] " + p.getName() + " attempted to purchase "
 					+ qty + " " + mob + " spawners without having enough money."));
+			p.closeInventory();
 			return;
 		}
 
@@ -158,11 +159,11 @@ public class Qty {
 		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
 				"spawnergive " + p.getName() + " pig_zombie " + qty);
 		p.sendMessage("spawnergive " + p.getName() + " pig_zombie " + qty);
-		DecimalFormat formatter = new DecimalFormat("#,###");
+		// DecimalFormat formatter = new DecimalFormat("#,###");
 
 		int price = config.getConfigurationSection("Zombie_pigman").getInt("Buy") * qty;
 		String successfulTransaction = messages.getString("successfulTransaction").replace("%amt%",
-				formatter.format(price));
+				String.valueOf(price));
 		p.sendMessage(Utils.chat(successfulTransaction));
 		return;
 	}
@@ -173,11 +174,11 @@ public class Qty {
 		FileConfiguration messages = fileManager.getDataConfig("messages");
 		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
 				"spawnergive " + p.getName() + " mushroom_cow " + qty);
-		DecimalFormat formatter = new DecimalFormat("#,###");
+		// DecimalFormat formatter = new DecimalFormat("#,###");
 
 		int price = config.getConfigurationSection("Mooshroom").getInt("Buy") * qty;
 		String successfulTransaction = messages.getString("successfulTransaction").replace("%amt%",
-				formatter.format(price));
+				String.valueOf(price));
 		p.sendMessage(Utils.chat(successfulTransaction));
 	}
 }

@@ -1,6 +1,5 @@
 package me.Darrionat.GUIShopSpawners.Commands;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
@@ -73,10 +72,10 @@ public class Spawners implements CommandExecutor {
 			if (args[0].equalsIgnoreCase("list")) {
 				if (!(sender instanceof Player)) {
 					for (int i = 1; i <= 38; i = i + 1) {
-						DecimalFormat formatter = new DecimalFormat("#,###");
+						// DecimalFormat formatter = new DecimalFormat("#,###");
 						ConfigurationSection mobSection = config.getConfigurationSection(mobs.get(i));
-						String buyprice = formatter.format(mobSection.getInt("Buy"));
-						String sellprice = formatter.format(mobSection.getInt("Sell"));
+						String buyprice = String.valueOf(mobSection.getInt("Buy"));
+						String sellprice = String.valueOf(mobSection.getInt("Sell"));
 
 						if (mobSection.getBoolean("Enabled") == true) {
 							sender.sendMessage(Utils.chat(
@@ -96,10 +95,10 @@ public class Spawners implements CommandExecutor {
 					return true;
 				}
 				for (int i = 1; i <= 38; i = i + 1) {
-					DecimalFormat formatter = new DecimalFormat("#,###");
+					// DecimalFormat formatter = new DecimalFormat("#,###");
 					ConfigurationSection mobSection = config.getConfigurationSection(mobs.get(i));
-					String buyprice = formatter.format(mobSection.getInt("Buy"));
-					String sellprice = formatter.format(mobSection.getInt("Sell"));
+					String buyprice = String.valueOf(mobSection.getInt("Buy"));
+					String sellprice = String.valueOf(mobSection.getInt("Sell"));
 					if (mobSection.getBoolean("Enabled") == true) {
 						sender.sendMessage(Utils
 								.chat("&a" + mobs.get(i) + " true &eBuy: &a$" + buyprice + " &eSell: &c$" + sellprice));

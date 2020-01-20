@@ -1,4 +1,7 @@
 GUIName: '&cSpawners'
+CloseMenuItem: "&eClose Menu"
+SellSpawnerItem: "&cSell spawners in hand"
+GoBackItem: "&7Go Back"
 SellSpawnersEnabled: true
 Fill Item Enabled: true
 Fill Item ID: BLACK_STAINED_GLASS_PANE

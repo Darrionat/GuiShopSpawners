@@ -1,7 +1,6 @@
 package me.Darrionat.GUIShopSpawners;
 
 import java.lang.reflect.Field;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -127,7 +126,7 @@ public class Main extends JavaPlugin {
 
 		ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1);
 		// SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
-		DecimalFormat formatter = new DecimalFormat("#,###");
+		// DecimalFormat formatter = new DecimalFormat("#,###");
 
 		String fillItemID = config.getString("Fill Item ID").toUpperCase();
 		Material fillItemMaterial = Material.getMaterial(fillItemID);
@@ -157,26 +156,32 @@ public class Main extends JavaPlugin {
 			int price = mobSection.getInt("Buy");
 			int sellprice = mobSection.getInt("Sell");
 
-			String buy = "&aBuy: $" + formatter.format(price);
-			String sell = "&cSell: $" + formatter.format(sellprice);
+			String buy = "&aBuy: $" + price;
+			String sell = "&cSell: $" + sellprice;
 
 			Utils.createskullItem(inv, skull, 1, slot, name, buy, sell);
 
 		}
-		Utils.createItem(inv, Material.NETHER_STAR, 1, 50, "&eClose Menu");
+
 		// The clicked code will be processed by Qty.java
 		if (p.hasPermission("guishopspawners.sell")) {
-			Utils.createItem(inv, Material.HOPPER, 1, 51, "&cSell spawners in hand");
+			Utils.createItem(inv, Material.HOPPER, 1, 51, Utils.chat(config.getString("SellSpawnerItem")));
 		}
+		Utils.createItem(inv, Material.NETHER_STAR, 1, 50, Utils.chat(config.getString(("CloseMenuItem"))));
 		toReturn.setContents(inv.getContents());
 		return toReturn;
 	}
 
 	public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv, JavaPlugin plugin) {
-		if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&eClose Menu"))) {
+		if (clicked.getItemMeta().getDisplayName()
+				.equalsIgnoreCase(Utils.chat(plugin.getConfig().getString("CloseMenuItem")))) {
 			p.closeInventory();
 		}
-
+		if (clicked.getItemMeta().getDisplayName()
+				.equalsIgnoreCase(Utils.chat(plugin.getConfig().getString("SellSpawnerItem")))) {
+			p.chat("/sellspawner");
+			return;
+		}
 		Maps map = new Maps();
 		HashMap<Integer, String> mobs = map.getMobMap();
 		HashMap<Integer, String> skulls = map.getSkullMap();

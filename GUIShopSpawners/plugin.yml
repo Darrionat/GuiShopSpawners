@@ -1,7 +1,7 @@
 name: GUIShopSpawners
 main: me.Darrionat.GUIShopSpawners.Main
 description: A way to buy spawners!
-version: 1.9.3
+version: 2.0
 api-version: 1.13
 depend: [MineableSpawners]
 
