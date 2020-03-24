@@ -1,0 +1,35 @@
+name: GUIShopSpawners
+main: me.Darrionat.GUIShopSpawners.Main
+description: A way to buy spawners!
+version: 2.0
+api-version: 1.13
+depend: [MineableSpawners]
+
+commands:
+  spawners:
+    aliases: [sps, sshop]
+    usage: /<command> [reload/list/edit]
+  sellspawner:
+    aliases: [ssp, sellspawn]
+    usage: /<command>
+    
+permissions:
+  guishopspawners.*:
+    description: Gives access to all spawner commands
+    children:
+      guishopspawners.shop: true
+      guishopspawners.sell: true
+      guishopspawners.reload: true
+      guishopspawners.admin: true
+  guishopspawners.shop:
+    description: Allows to open the shop.
+    default: true
+  guishopspawners.sell:
+    description: Allows you to sell spawners
+    default: true
+  guishopspawners.reload:
+    description: Reloads the GUIShopSpawners pluguin
+    default: op
+  guishopspawners.admin:
+    description: Allows a player to edit the spawners and see the list.
+    default: op

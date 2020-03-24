@@ -1,0 +1,199 @@
+GUIName: '&cSpawners'
+CloseMenuItem: "&eClose Menu"
+SellSpawnerItem: "&cSell spawners in hand"
+GoBackItem: "&7Go Back"
+SellSpawnersEnabled: true
+Fill Item Enabled: true
+Fill Item ID: BLACK_STAINED_GLASS_PANE
+checkUpdates: true
+
+Creeper:
+    Enabled: true
+    Slot: 1
+    Buy: 100
+    Sell: 50
+Skeleton:
+    Enabled: true
+    Slot: 2
+    Buy: 100
+    Sell: 50
+Spider:
+    Enabled: true
+    Slot: 3
+    Buy: 100
+    Sell: 50
+Iron_golem:
+    Enabled: true
+    Slot: 4
+    Buy: 100
+    Sell: 50
+Zombie:
+    Enabled: true
+    Slot: 5
+    Buy: 100
+    Sell: 50
+Slime:
+    Enabled: true
+    Slot: 6
+    Buy: 100
+    Sell: 50
+Witch:
+    Enabled: true
+    Slot: 7
+    Buy: 100
+    Sell: 50
+Zombie_pigman:
+    Enabled: true
+    Slot: 8
+    Buy: 100
+    Sell: 50
+Enderman:
+    Enabled: true
+    Slot: 9
+    Buy: 100
+    Sell: 50
+Cave_spider:
+    Enabled: true
+    Slot: 10
+    Buy: 100
+    Sell: 50
+Vindicator:
+    Enabled: true
+    Slot: 11
+    Buy: 100
+    Sell: 50
+Cow:
+    Enabled: true
+    Slot: 12
+    Buy: 100
+    Sell: 50
+Rabbit:
+    Enabled: true
+    Slot: 13
+    Buy: 100
+    Sell: 50
+Sheep:
+    Enabled: true
+    Slot: 14
+    Buy: 100
+    Sell: 50
+Horse:
+    Enabled: true
+    Slot: 15
+    Buy: 100
+    Sell: 50
+Blaze:
+    Enabled: true
+    Slot: 16
+    Buy: 100
+    Sell: 50
+Pig:
+    Enabled: true
+    Slot: 17
+    Buy: 100
+    Sell: 50
+Chicken:
+    Enabled: true
+    Slot: 18
+    Buy: 100
+    Sell: 50
+Squid:
+    Enabled: true
+    Slot: 19
+    Buy: 100
+    Sell: 50
+Wolf:
+    Enabled: true
+    Slot: 20
+    Buy: 100
+    Sell: 50
+Mooshroom:
+    Enabled: true
+    Slot: 21
+    Buy: 100
+    Sell: 50
+Wither_skeleton:
+    Enabled: true
+    Slot: 22
+    Buy: 100
+    Sell: 50
+Ender_dragon:
+    Enabled: true
+    Slot: 23
+    Buy: 100
+    Sell: 50
+Wither:
+    Enabled: true
+    Slot: 24
+    Buy: 100
+    Sell: 50
+Ghast:
+    Enabled: true
+    Slot: 25
+    Buy: 100
+    Sell: 50
+Guardian:
+    Enabled: true
+    Slot: 26
+    Buy: 100
+    Sell: 50
+Shulker:
+    Enabled: true
+    Slot: 27
+    Buy: 100
+    Sell: 50
+Ocelot:
+    Enabled: true
+    Slot: 28
+    Buy: 100
+    Sell: 50
+Polar_bear:
+    Enabled: true
+    Slot: 29
+    Buy: 100
+    Sell: 50
+Llama:
+    Enabled: true
+    Slot: 30
+    Buy: 100
+    Sell: 50
+Parrot:
+    Enabled: true
+    Slot: 31
+    Buy: 100
+    Sell: 50
+Turtle:
+    Enabled: true
+    Slot: 32
+    Buy: 100
+    Sell: 50
+Phantom:
+    Enabled: true
+    Slot: 33
+    Buy: 100
+    Sell: 50
+Drowned:
+    Enabled: true
+    Slot: 34
+    Buy: 100
+    Sell: 50
+Panda:
+    Enabled: true
+    Slot: 35
+    Buy: 100
+    Sell: 50
+Dolphin:
+    Enabled: true
+    Slot: 36
+    Buy: 100
+    Sell: 50
+Pillager:
+    Enabled: true
+    Slot: 37
+    Buy: 100
+    Sell: 50
+Villager:
+    Enabled: true
+    Slot: 38
+    Buy: 100
+    Sell: 50
