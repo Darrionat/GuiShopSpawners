@@ -127,6 +127,7 @@ public class Qty {
 		@SuppressWarnings("deprecation")
 		EconomyResponse sell = GuiShopSpawners.econ.withdrawPlayer(p.getName(), price * qty);
 		if (sell.transactionSuccess()) {
+
 			if (mob.equalsIgnoreCase("Zombie_Pigman")) {
 				Qty.zombiePigman(p, qty, plugin);
 				return;
@@ -135,21 +136,19 @@ public class Qty {
 				Qty.mooshroom(p, qty, plugin);
 				return;
 			}
+
 			Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-					"spawnergive " + p.getName() + " " + mob + " " + qty);
+					"mineablespawners give " + p.getName() + " " + mob + " " + qty);
 			String successfulTransaction = messages.getString("successfulTransaction").replace("%amt%",
 					String.valueOf(price * qty));
 			p.sendMessage(Utils.chat(successfulTransaction));
 			p.closeInventory();
 			return;
-		} else {
-			p.sendMessage(Utils.chat(notEnoughMoney));
-			System.out.println(Utils.chat("&c[" + plugin.getName() + "] " + p.getName() + " attempted to purchase "
-					+ qty + " " + mob + " spawners without having enough money."));
-			p.closeInventory();
-			return;
 		}
-
+		p.sendMessage(Utils.chat(notEnoughMoney));
+		System.out.println(Utils.chat("&c[" + plugin.getName() + "] " + p.getName() + " attempted to purchase " + qty
+				+ " " + mob + " spawners without having enough money."));
+		p.closeInventory();
 	}
 
 	public static void zombiePigman(Player p, int qty, JavaPlugin plugin) {
@@ -157,15 +156,14 @@ public class Qty {
 		FileManager fileManager = new FileManager((GuiShopSpawners) plugin);
 		FileConfiguration messages = fileManager.getDataConfig("messages");
 		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-				"spawnergive " + p.getName() + " pig_zombie " + qty);
-		p.sendMessage("spawnergive " + p.getName() + " pig_zombie " + qty);
+				"mineablespawners give " + p.getName() + " pig_zombie " + qty);
 		// DecimalFormat formatter = new DecimalFormat("#,###");
 
 		int price = config.getConfigurationSection("Zombie_pigman").getInt("Buy") * qty;
 		String successfulTransaction = messages.getString("successfulTransaction").replace("%amt%",
 				String.valueOf(price));
 		p.sendMessage(Utils.chat(successfulTransaction));
-		return;
+		p.closeInventory();
 	}
 
 	public static void mooshroom(Player p, int qty, JavaPlugin plugin) {
@@ -173,12 +171,13 @@ public class Qty {
 		FileManager fileManager = new FileManager((GuiShopSpawners) plugin);
 		FileConfiguration messages = fileManager.getDataConfig("messages");
 		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-				"spawnergive " + p.getName() + " mushroom_cow " + qty);
+				"mineablespawners give " + p.getName() + " mushroom_cow " + qty);
 		// DecimalFormat formatter = new DecimalFormat("#,###");
 
 		int price = config.getConfigurationSection("Mooshroom").getInt("Buy") * qty;
 		String successfulTransaction = messages.getString("successfulTransaction").replace("%amt%",
 				String.valueOf(price));
 		p.sendMessage(Utils.chat(successfulTransaction));
+		p.closeInventory();
 	}
 }
